@@ -1,8 +1,21 @@
-const http = require("http");
+// const http = require("http");
 
-const { log } = require("console");
-const route = require("./first");
+// const { log } = require("console");
+// const route = require("./first");
 
-const server = http.createServer(route);
+const express = require("express");
+const app = express();
 
-server.listen(3000);
+app.use((req, res, next) => {
+  console.log("In the middleware");
+  next();
+});
+
+app.use((req, res, next) => {
+  console.log("In the middleware");
+  res.send({ key1: 1 });
+});
+
+// const server = http.createServer(app);
+
+app.listen(3000);
